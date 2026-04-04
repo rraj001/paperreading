@@ -1,0 +1,33 @@
+[
+    {
+      "title": "Cassandra - A Decentralized Structured Storage System",
+      "authors": "Lakshman, Prashant",
+      "url": "https://www.cs.cornell.edu/projects/ladis2009/papers/lakshman-ladis2009.pdf",
+      "tags": ["distrubuted cache", "kv store", "system design"],
+      "status": "completed",
+      "abstract": "",
+      "notes": [
+       
+      ]
+    },
+    {
+      "title": "Distinct Elements in Streams",
+      "authors": "Cormode, Graham",
+      "url": "https://arxiv.org/abs/2301.10191",
+      "tags": ["probabilistic data structures", "streaming algorithms"],
+      "status": "completed",
+      "notes": [
+      ]
+    },
+    {
+      "title": "Data Infrastructure at Ubder",
+      "authors": "Chang, Fei",
+      "url": "https://arxiv.org/abs/2104.00087",
+      "tags": ["olap", "data infrastructure", "uber"],
+      "status": "reading",
+      "abstract": "",
+      "notes": [
+       
+      ]
+    }
+  ]

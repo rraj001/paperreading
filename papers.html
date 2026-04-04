@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reading List — Ritu Raj</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF8;
+    --text: #1a1a1a;
+    --text-secondary: #6b6b6b;
+    --text-tertiary: #999;
+    --accent: #c44d2b;
+    --border: #e8e6e1;
+    --card-bg: #ffffff;
+    --tag-bg: #f0eeea;
+    --tag-text: #555;
+    --summary-bg: #f7f6f3;
+    --summary-border: #e0ddd6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 80px 24px 120px;
+  }
+
+  /* ── Header ── */
+  header {
+    margin-bottom: 64px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  header h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 3rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  header h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  header p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    max-width: 480px;
+  }
+
+  header .meta {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── Filter bar ── */
+  .filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+    animation: fadeUp 0.6s ease 0.1s both;
+  }
+
+  .filter-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 400;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .filter-btn:hover { border-color: var(--text-secondary); color: var(--text); }
+  .filter-btn.active {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+  }
+
+  /* ── Paper cards ── */
+  .papers-list { display: flex; flex-direction: column; gap: 2px; }
+
+  .paper {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .paper:first-child { border-top: 1px solid var(--border); }
+
+  .paper-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+
+  .paper-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    transition: color 0.2s ease;
+  }
+
+  .paper-title a {
+    color: inherit;
+    text-decoration: none;
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s ease;
+  }
+
+  .paper-title a:hover { background-size: 100% 1px; }
+
+  .paper-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+    padding-top: 6px;
+  }
+
+  .paper-authors {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+  }
+
+  .paper-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.03em;
+    padding: 3px 10px;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    border-radius: 3px;
+  }
+
+  .paper-abstract {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .paper-abstract summary {
+    cursor: pointer;
+    font-weight: 400;
+    color: var(--text-tertiary);
+    font-size: 0.8rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.03em;
+    user-select: none;
+    transition: color 0.2s ease;
+  }
+
+  .paper-abstract summary:hover { color: var(--text); }
+
+  .paper-abstract .abstract-text {
+    margin-top: 10px;
+    padding-left: 14px;
+    border-left: 2px solid var(--border);
+  }
+
+  /* ── My notes / summary section ── */
+  .paper-notes {
+    background: var(--summary-bg);
+    border: 1px solid var(--summary-border);
+    border-radius: 6px;
+    padding: 18px 20px;
+    margin-top: 16px;
+  }
+
+  .paper-notes .notes-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .paper-notes .note-entry {
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed var(--summary-border);
+  }
+
+  .paper-notes .note-entry:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .paper-notes .note-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text-tertiary);
+    margin-bottom: 4px;
+  }
+
+  .paper-notes .note-text {
+    font-size: 0.86rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* ── Status badge ── */
+  .status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+
+  .status.reading { background: #fef3cd; color: #856404; }
+  .status.completed { background: #d4edda; color: #155724; }
+  .status.revisiting { background: #e0d4f5; color: #4a2d7a; }
+
+  /* ── Empty state ── */
+  .empty {
+    text-align: center;
+    padding: 60px 0;
+    color: var(--text-tertiary);
+    font-size: 0.9rem;
+  }
+
+  /* ── Footer ── */
+  footer {
+    margin-top: 80px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem;
+    color: var(--text-tertiary);
+    display: flex;
+    justify-content: space-between;
+    animation: fadeUp 0.6s ease 0.3s both;
+  }
+
+  footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  footer a:hover { color: var(--accent); }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    .container { padding: 48px 18px 80px; }
+    header h1 { font-size: 2.2rem; }
+    .paper { padding: 24px 0; }
+    .paper-title { font-size: 1.15rem; }
+    footer { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>What I'm <em>Reading</em></h1>
+    <p>Papers I'm currently reading, re-reading, or have recently finished — along with what I'm taking away from each one.</p>
+    <div class="meta" id="paper-count"></div>
+  </header>
+
+  <div class="filters" id="filters"></div>
+
+  <div class="papers-list" id="papers-list"></div>
+
+  <footer>
+    <span>Ritu Raj — <span id="year"></span></span>
+    <a href="https://github.com/rraj" target="_blank">github</a>
+  </footer>
+</div>
+
+<script>
+let PAPERS = [];
+let activeFilter = 'all';
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Load papers from JSON
+fetch('./papers.json')
+  .then(r => {
+    if (!r.ok) throw new Error(`Failed to load papers.json: ${r.status}`);
+    return r.json();
+  })
+  .then(data => {
+    PAPERS = data;
+    renderFilters();
+    renderPapers();
+  })
+  .catch(err => {
+    console.error(err);
+    document.getElementById('papers-list').innerHTML =
+      `<div class="empty">Could not load papers. Make sure papers.json is in the same directory.</div>`;
+  });
+
+function getAllTags() {
+  const tags = new Set();
+  PAPERS.forEach(p => p.tags.forEach(t => tags.add(t)));
+  return [...tags].sort();
+}
+
+function renderFilters() {
+  const container = document.getElementById('filters');
+  const tags = getAllTags();
+  const statuses = [...new Set(PAPERS.map(p => p.status))];
+
+  let html = `<button class="filter-btn active" data-filter="all">All</button>`;
+  statuses.forEach(s => {
+    html += `<button class="filter-btn" data-filter="status:${s}">${s}</button>`;
+  });
+  tags.forEach(t => {
+    html += `<button class="filter-btn" data-filter="tag:${t}">${t}</button>`;
+  });
+  container.innerHTML = html;
+
+  container.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      container.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+      renderPapers();
+    });
+  });
+}
+
+function renderPapers() {
+  const container = document.getElementById('papers-list');
+  let filtered = PAPERS;
+
+  if (activeFilter !== 'all') {
+    if (activeFilter.startsWith('status:')) {
+      const s = activeFilter.replace('status:', '');
+      filtered = PAPERS.filter(p => p.status === s);
+    } else if (activeFilter.startsWith('tag:')) {
+      const t = activeFilter.replace('tag:', '');
+      filtered = PAPERS.filter(p => p.tags.includes(t));
+    }
+  }
+
+  document.getElementById('paper-count').textContent =
+    `${filtered.length} paper${filtered.length !== 1 ? 's' : ''} · last updated ${new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}`;
+
+  if (filtered.length === 0) {
+    container.innerHTML = `<div class="empty">No papers match this filter.</div>`;
+    return;
+  }
+
+  container.innerHTML = filtered.map((p, i) => {
+    const num = String(i + 1).padStart(2, '0');
+    const notesHtml = (p.notes && p.notes.length > 0)
+      ? `<div class="paper-notes">
+           <div class="notes-label">My Understanding</div>
+           ${p.notes.map(n => `
+             <div class="note-entry">
+               <div class="note-date">${formatDate(n.date)}</div>
+               <div class="note-text">${n.text}</div>
+             </div>
+           `).join('')}
+         </div>`
+      : '';
+
+    return `
+      <div class="paper" style="animation-delay: ${i * 0.06}s">
+        <div class="paper-header">
+          <div class="paper-title"><a href="${p.url}" target="_blank">${p.title}</a></div>
+          <div class="paper-number">${num}</div>
+        </div>
+        <div class="paper-authors">${p.authors}</div>
+        <span class="status ${p.status}">${p.status}</span>
+        <div class="paper-tags">
+          ${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+        </div>
+        <details class="paper-abstract">
+          <summary>abstract</summary>
+          <div class="abstract-text">${p.abstract}</div>
+        </details>
+        ${notesHtml}
+      </div>
+    `;
+  }).join('');
+}
+
+function formatDate(dateStr) {
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+</script>
+</body>
+</html>
