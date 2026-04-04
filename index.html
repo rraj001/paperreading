@@ -83,10 +83,26 @@
   /* ── Filter bar ── */
   .filters {
     display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 12px;
     margin-bottom: 48px;
     animation: fadeUp 0.6s ease 0.1s both;
+  }
+
+  .filter-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .filter-group-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
+    margin-right: 2px;
   }
 
   .filter-btn {
@@ -103,13 +119,6 @@
   }
 
   .filter-btn:hover { border-color: var(--text-secondary); color: var(--text); }
-  .filter-sep {
-    width: 1px;
-    background: var(--border);
-    align-self: stretch;
-    margin: 0 4px;
-  }
-
   .filter-btn.active {
     background: var(--text);
     color: var(--bg);
@@ -376,15 +385,19 @@ function renderFilters() {
   const tags = getAllTags();
   const statuses = [...new Set(PAPERS.map(p => p.status))];
 
-  let html = `<button class="filter-btn active" data-filter="all">All</button>`;
+  let statusHtml = `<div class="filter-group"><span class="filter-group-label">status</span><button class="filter-btn active" data-filter="all">All</button>`;
   statuses.forEach(s => {
-    html += `<button class="filter-btn" data-filter="status:${s}">${s}</button>`;
+    statusHtml += `<button class="filter-btn" data-filter="status:${s}">${s}</button>`;
   });
-  html += `<span class="filter-sep"></span>`;
+  statusHtml += `</div>`;
+
+  let tagHtml = `<div class="filter-group"><span class="filter-group-label">topic</span>`;
   tags.forEach(t => {
-    html += `<button class="filter-btn" data-filter="tag:${t}">${t}</button>`;
+    tagHtml += `<button class="filter-btn" data-filter="tag:${t}">${t}</button>`;
   });
-  container.innerHTML = html;
+  tagHtml += `</div>`;
+
+  container.innerHTML = statusHtml + tagHtml;
 
   container.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
