@@ -103,6 +103,13 @@
   }
 
   .filter-btn:hover { border-color: var(--text-secondary); color: var(--text); }
+  .filter-sep {
+    width: 1px;
+    background: var(--border);
+    align-self: stretch;
+    margin: 0 4px;
+  }
+
   .filter-btn.active {
     background: var(--text);
     color: var(--bg);
@@ -373,6 +380,7 @@ function renderFilters() {
   statuses.forEach(s => {
     html += `<button class="filter-btn" data-filter="status:${s}">${s}</button>`;
   });
+  html += `<span class="filter-sep"></span>`;
   tags.forEach(t => {
     html += `<button class="filter-btn" data-filter="tag:${t}">${t}</button>`;
   });
@@ -388,6 +396,8 @@ function renderFilters() {
   });
 }
 
+const STATUS_ORDER = { reading: 0, completed: 1 };
+
 function renderPapers() {
   const container = document.getElementById('papers-list');
   let filtered = PAPERS;
@@ -401,6 +411,10 @@ function renderPapers() {
       filtered = PAPERS.filter(p => p.tags.includes(t));
     }
   }
+
+  filtered = [...filtered].sort((a, b) =>
+    (STATUS_ORDER[a.status] ?? 99) - (STATUS_ORDER[b.status] ?? 99)
+  );
 
   document.getElementById('paper-count').textContent =
     `${filtered.length} paper${filtered.length !== 1 ? 's' : ''} · last updated ${new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}`;
