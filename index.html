@@ -64,6 +64,14 @@
     max-width: 480px;
   }
 
+  header .author-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+  }
+
   header .meta {
     margin-top: 20px;
     font-size: 0.8rem;
@@ -284,6 +292,9 @@
   }
   footer a:hover { color: var(--accent); }
 
+  .footer-links { display: flex; gap: 6px; align-items: center; }
+  .footer-sep { color: var(--text-tertiary); }
+
   /* ── Animations ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(14px); }
@@ -305,6 +316,7 @@
 
   <header>
     <h1>What I'm <em>Reading</em></h1>
+    <p class="author-name">by Ritu Raj</p>
     <p>Papers I'm currently reading, re-reading, or have recently finished — along with what I'm taking away from each one.</p>
     <div class="meta" id="paper-count"></div>
   </header>
@@ -315,7 +327,11 @@
 
   <footer>
     <span>Ritu Raj — <span id="year"></span></span>
-    <a href="https://github.com/rraj" target="_blank">github</a>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/ritu-raj001/" target="_blank">linkedin</a>
+      <span class="footer-sep">·</span>
+      <a href="mailto:rituik.raj001@gmail.com">email</a>
+    </div>
   </footer>
 </div>
 
