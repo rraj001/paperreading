@@ -289,6 +289,36 @@
     font-size: 0.9rem;
   }
 
+  /* ── Resume ── */
+  .resume-section {
+    margin-top: 80px;
+    padding: 28px 32px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--card-bg);
+  }
+
+  .resume-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
+  }
+
+  .resume-link {
+    font-size: 0.88rem;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+
+  .resume-link:hover { border-color: var(--accent); }
+
   /* ── Footer ── */
   footer {
     margin-top: 80px;
@@ -340,6 +370,11 @@
   <div class="filters" id="filters"></div>
 
   <div class="papers-list" id="papers-list"></div>
+
+  <div class="resume-section">
+    <div class="resume-label">résumé</div>
+    <a href="./Resume_Ritu2026v1.pdf" target="_blank" class="resume-link">View / Download CV</a>
+  </div>
 
   <footer>
     <span>Ritu Raj — <span id="year"></span></span>
