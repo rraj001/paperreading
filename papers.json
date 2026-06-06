@@ -24,6 +24,17 @@
       "authors": "Chang, Fei",
       "url": "https://arxiv.org/abs/2104.00087",
       "tags": ["olap", "data infrastructure", "uber"],
+      "status": "completed",
+      "abstract": "",
+      "notes": [
+       
+      ]
+    },
+    {
+      "title": "Clickhouse - High performance analytics",
+      "authors": "Robert Schulze,Tom Schreiber,Ilya Yatsishin,Ryadh Dahimene,Alexey Milovidov",
+      "url": "https://www.vldb.org/pvldb/vol17/p3731-schulze.pdf",
+      "tags": ["olap", "data infrastructure"],
       "status": "reading",
       "abstract": "",
       "notes": [
