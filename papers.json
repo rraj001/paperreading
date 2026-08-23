@@ -35,6 +35,16 @@
       "authors": "Robert Schulze,Tom Schreiber,Ilya Yatsishin,Ryadh Dahimene,Alexey Milovidov",
       "url": "https://www.vldb.org/pvldb/vol17/p3731-schulze.pdf",
       "tags": ["olap", "data infrastructure"],
+      "status": "completed",
+      "abstract": "",
+      "notes": [
+       
+      ]
+    },
+    {
+      "title": "Distributed Logging in Meta",
+      "url": "https://www.vldb.org/pvldb/vol18/p4817-karpathiotakis.pdf",
+      "tags": ["olap", "ingestion","analytics"],
       "status": "reading",
       "abstract": "",
       "notes": [
@@ -42,3 +52,6 @@
       ]
     }
   ]
+
+
+  
