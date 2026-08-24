@@ -33,9 +33,90 @@
   }
 
   .container {
-    max-width: 740px;
+    max-width: 1060px;
     margin: 0 auto;
     padding: 80px 24px 120px;
+  }
+
+  /* ── Page layout (sidebar + main) ── */
+  .page-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 56px;
+  }
+
+  .main-content {
+    flex: 1;
+    min-width: 0;
+    max-width: 740px;
+  }
+
+  /* ── About me sidebar ── */
+  .sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 80px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .sidebar-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  .sidebar-name {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+
+  .sidebar-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+
+  .sidebar-bio {
+    font-size: 0.86rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .sidebar-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .sidebar-links a {
+    font-size: 0.82rem;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    width: fit-content;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .sidebar-links a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
   }
 
   /* ── Header ── */
@@ -348,6 +429,12 @@
   }
 
   /* ── Responsive ── */
+  @media (max-width: 860px) {
+    .page-layout { flex-direction: column; gap: 40px; }
+    .sidebar { width: 100%; position: static; }
+    .main-content { max-width: 100%; }
+  }
+
   @media (max-width: 600px) {
     .container { padding: 48px 18px 80px; }
     header h1 { font-size: 2.2rem; }
@@ -359,31 +446,49 @@
 </head>
 <body>
 <div class="container">
+<div class="page-layout">
 
-  <header>
-    <h1>What I'm <em>Reading</em></h1>
-    <p class="author-name">by Ritu Raj</p>
-    <p>Papers I'm currently reading, re-reading, or have recently finished — along with what I'm taking away from each one.</p>
-    <div class="meta" id="paper-count"></div>
-  </header>
-
-  <div class="filters" id="filters"></div>
-
-  <div class="papers-list" id="papers-list"></div>
-
-  <div class="resume-section">
-    <div class="resume-label">résumé</div>
-    <a href="./Resume_Ritu2026v1.pdf" target="_blank" class="resume-link">View / Download CV</a>
-  </div>
-
-  <footer>
-    <span>Ritu Raj — <span id="year"></span></span>
-    <div class="footer-links">
-      <a href="https://www.linkedin.com/in/ritu-raj001/" target="_blank">linkedin</a>
-      <span class="footer-sep">·</span>
-      <a href="mailto:rituik.raj001@gmail.com">email</a>
+  <aside class="sidebar">
+    <div class="sidebar-avatar">RR</div>
+    <h2 class="sidebar-name">Ritu Raj</h2>
+    <p class="sidebar-title">Senior Software Engineer<br>Shopee, Singapore</p>
+    <p class="sidebar-bio">I work on Shopee's Anti-Fraud team, building distributed, real-time systems for fraud detection and internal platforms. MSc Computer Science, NUS. This is where I keep notes on the papers I'm reading.</p>
+    <div class="sidebar-links">
+      <a href="https://www.linkedin.com/in/ritu-raj001/" target="_blank">LinkedIn ↗</a>
+      <a href="https://github.com/rraj001" target="_blank">GitHub ↗</a>
+      <a href="mailto:rituik.raj001@gmail.com">Email ↗</a>
+      <a href="./Resume_Ritu2026v1.pdf" target="_blank">Résumé ↗</a>
     </div>
-  </footer>
+  </aside>
+
+  <main class="main-content">
+    <header>
+      <h1>What I'm <em>Reading</em></h1>
+      <p class="author-name">by Ritu Raj</p>
+      <p>Papers I'm currently reading, re-reading, or have recently finished — along with what I'm taking away from each one.</p>
+      <div class="meta" id="paper-count"></div>
+    </header>
+
+    <div class="filters" id="filters"></div>
+
+    <div class="papers-list" id="papers-list"></div>
+
+    <div class="resume-section">
+      <div class="resume-label">résumé</div>
+      <a href="./Resume_Ritu2026v1.pdf" target="_blank" class="resume-link">View / Download CV</a>
+    </div>
+
+    <footer>
+      <span>Ritu Raj — <span id="year"></span></span>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/ritu-raj001/" target="_blank">linkedin</a>
+        <span class="footer-sep">·</span>
+        <a href="mailto:rituik.raj001@gmail.com">email</a>
+      </div>
+    </footer>
+  </main>
+
+</div>
 </div>
 
 <script>
