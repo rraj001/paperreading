@@ -50,6 +50,17 @@
       "notes": [
        
       ]
+    },
+    {
+      "title": "Zanzibar: Google’s Consistent, Global
+Authorization System",
+      "url": "https://www.usenix.org/system/files/atc19-pang.pdf",
+      "tags": ["IAM", "AUTHORIZATION","access controls"],
+      "status": "reading",
+      "abstract": "",
+      "notes": [
+       
+      ]
     }
   ]
 
