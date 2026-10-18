@@ -1,67 +1,133 @@
 [
-    {
-      "title": "Cassandra - A Decentralized Structured Storage System",
-      "authors": "Lakshman, Prashant",
-      "url": "https://www.cs.cornell.edu/projects/ladis2009/papers/lakshman-ladis2009.pdf",
-      "tags": ["distrubuted cache", "kv store", "system design"],
-      "status": "completed",
-      "abstract": "",
-      "notes": [
-       
-      ]
-    },
-    {
-      "title": "Distinct Elements in Streams",
-      "authors": "Cormode, Graham",
-      "url": "https://arxiv.org/abs/2301.10191",
-      "tags": ["probabilistic data structures", "streaming algorithms"],
-      "status": "completed",
-      "notes": [
-      ]
-    },
-    {
-      "title": "Data Infrastructure at Uber",
-      "authors": "Chang, Fei",
-      "url": "https://arxiv.org/abs/2104.00087",
-      "tags": ["olap", "data infrastructure", "uber"],
-      "status": "completed",
-      "abstract": "",
-      "notes": [
-       
-      ]
-    },
-    {
-      "title": "Clickhouse - High performance analytics",
-      "authors": "Robert Schulze,Tom Schreiber,Ilya Yatsishin,Ryadh Dahimene,Alexey Milovidov",
-      "url": "https://www.vldb.org/pvldb/vol17/p3731-schulze.pdf",
-      "tags": ["olap", "data infrastructure"],
-      "status": "completed",
-      "abstract": "",
-      "notes": [
-       
-      ]
-    },
-    {
-      "title": "Distributed Logging in Meta",
-      "url": "https://www.vldb.org/pvldb/vol18/p4817-karpathiotakis.pdf",
-      "tags": ["olap", "ingestion","analytics"],
-      "status": "reading",
-      "abstract": "",
-      "notes": [
-       
-      ]
-    },
-    {
-      "title": "Zanzibar: Google’s Consistent, Global Authorization System",
-      "url": "https://www.usenix.org/system/files/atc19-pang.pdf",
-      "tags": ["IAM", "AUTHORIZATION","access controls"],
-      "status": "reading",
-      "abstract": "",
-      "notes": [
-       
-      ]
-    }
-  ]
-
-
-  
+  {
+    "title": "Cassandra - A Decentralized Structured Storage System",
+    "authors": "Lakshman, Prashant",
+    "url": "https://www.cs.cornell.edu/projects/ladis2009/papers/lakshman-ladis2009.pdf",
+    "tags": [
+      "distrubuted cache",
+      "kv store",
+      "system design"
+    ],
+    "status": "completed",
+    "abstract": "",
+    "notes": [
+      {
+        "date": "2026-10-18",
+        "text": "Cassandra combines Dynamo's distribution design with Bigtable's data model. Consistent hashing places keys on a ring, and nodes find each other through gossip instead of a central master, so there is no single point of failure."
+      },
+      {
+        "date": "2026-10-18",
+        "text": "Writes go to a commit log and then an in-memory memtable, which is flushed to immutable SSTables that get compacted in the background. That is why writes are cheap and reads can cost more: a read may have to merge several SSTables, with Bloom filters cutting down the disk lookups."
+      },
+      {
+        "date": "2026-10-18",
+        "text": "Consistency is tunable per request through the replication factor and quorum settings. The main lesson for me: availability and partition tolerance come first, and you choose how much consistency to pay for on each operation."
+      }
+    ]
+  },
+  {
+    "title": "Distinct Elements in Streams",
+    "authors": "Cormode, Graham",
+    "url": "https://arxiv.org/abs/2301.10191",
+    "tags": [
+      "probabilistic data structures",
+      "streaming algorithms"
+    ],
+    "status": "completed",
+    "notes": [
+      {
+        "date": "2026-10-18",
+        "text": "The problem is counting distinct elements (F0) in a stream using very little memory. The CVM algorithm keeps a small buffer and samples each element with probability p. When the buffer fills, it drops each kept element with probability 1/2 and halves p. The estimate is |buffer| / p."
+      },
+      {
+        "date": "2026-10-18",
+        "text": "What makes it stand out is how simple it is. There is no hashing, so it is easy to explain and to prove correct, unlike HyperLogLog. HLL is still the practical choice in production for its tiny memory use and mergeable sketches, but CVM is the clearest way I've seen to understand the idea behind sampling-based counting."
+      }
+    ]
+  },
+  {
+    "title": "Data Infrastructure at Uber",
+    "authors": "Chang, Fei",
+    "url": "https://arxiv.org/abs/2104.00087",
+    "tags": [
+      "olap",
+      "data infrastructure",
+      "uber"
+    ],
+    "status": "completed",
+    "abstract": "",
+    "notes": [
+      {
+        "date": "2026-10-18",
+        "text": "Uber's real-time data stack is built from open-source parts: Kafka for transport, Flink for stream processing, Pinot for low-latency OLAP, HDFS and Hive for the data lake, and Presto for interactive SQL."
+      },
+      {
+        "date": "2026-10-18",
+        "text": "Most of the hard work was making these parts run at Uber's scale. Examples include Kafka federation and a consumer proxy, FlinkSQL so non-experts can build pipelines, and upserts plus real-time ingestion in Pinot. The paper frames choices as trade-offs between freshness, completeness, and cost, depending on the use case."
+      }
+    ]
+  },
+  {
+    "title": "Clickhouse - High performance analytics",
+    "authors": "Robert Schulze,Tom Schreiber,Ilya Yatsishin,Ryadh Dahimene,Alexey Milovidov",
+    "url": "https://www.vldb.org/pvldb/vol17/p3731-schulze.pdf",
+    "tags": [
+      "olap",
+      "data infrastructure"
+    ],
+    "status": "completed",
+    "abstract": "",
+    "notes": [
+      {
+        "date": "2026-10-18",
+        "text": "ClickHouse is a column-oriented OLAP database built around the MergeTree engine. Inserts create immutable sorted parts that are merged in the background, much like an LSM tree, and a sparse primary index lets queries skip whole granules of rows."
+      },
+      {
+        "date": "2026-10-18",
+        "text": "Its speed comes from vectorized execution, SIMD, heavy compression with column-specific codecs, and data-skipping indexes. Table engine variants such as Replacing, Aggregating and Collapsing push deduplication and pre-aggregation into the merge step, so the storage layer does work that would otherwise happen at query time."
+      }
+    ]
+  },
+  {
+    "title": "Distributed Logging in Meta",
+    "url": "https://www.vldb.org/pvldb/vol18/p4817-karpathiotakis.pdf",
+    "tags": [
+      "olap",
+      "ingestion",
+      "analytics"
+    ],
+    "status": "reading",
+    "abstract": "",
+    "notes": [
+      {
+        "date": "2026-10-18",
+        "text": "Scribe is Meta's multi-tenant message queue. It ingests more than 15 TB/s and serves more than 110 TB/s to consumers. Its key priority is write availability, because producer data is treated as the company's source of truth."
+      },
+      {
+        "date": "2026-10-18",
+        "text": "On the write path, data takes multiple hops and is placed opportunistically wherever it can be persisted. On the read path, replica placement and data representation adapt to how consumers actually read it. Each use case picks its own ordering and delivery guarantees instead of getting one fixed contract. Still reading."
+      }
+    ]
+  },
+  {
+    "title": "Zanzibar: Google’s Consistent, Global Authorization System",
+    "url": "https://www.usenix.org/system/files/atc19-pang.pdf",
+    "tags": [
+      "IAM",
+      "AUTHORIZATION",
+      "access controls"
+    ],
+    "status": "reading",
+    "abstract": "",
+    "notes": [
+      {
+        "date": "2026-10-18",
+        "text": "Zanzibar is Google's global authorization system. Permissions are stored as relation tuples (object#relation@user), and namespace configs with userset rewrites define how relations combine, for example that an editor is also a viewer."
+      },
+      {
+        "date": "2026-10-18",
+        "text": "Zookies are consistency tokens. They prevent the 'new enemy' problem, where a check is answered from data older than an ACL change, while still letting most checks be served from caches and snapshots. Spanner provides external consistency underneath. Still reading the parts on Leopard indexing and hot-spot handling."
+      }
+    ]
+  }
+]
