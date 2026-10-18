@@ -318,8 +318,11 @@
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--accent);
-    margin-bottom: 8px;
+    cursor: pointer;
+    user-select: none;
   }
+
+  .paper-notes[open] .notes-label { margin-bottom: 12px; }
 
   .paper-notes .note-entry {
     margin-bottom: 14px;
@@ -331,13 +334,6 @@
     margin-bottom: 0;
     padding-bottom: 0;
     border-bottom: none;
-  }
-
-  .paper-notes .note-date {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--text-tertiary);
-    margin-bottom: 4px;
   }
 
   .paper-notes .note-text {
@@ -544,15 +540,14 @@ function renderPapers() {
   container.innerHTML = filtered.map((p, i) => {
     const num = String(i + 1).padStart(2, '0');
     const notesHtml = (p.notes && p.notes.length > 0)
-      ? `<div class="paper-notes">
-           <div class="notes-label">My Understanding</div>
+      ? `<details class="paper-notes">
+           <summary class="notes-label">My Understanding</summary>
            ${p.notes.map(n => `
              <div class="note-entry">
-               <div class="note-date">${formatDate(n.date)}</div>
                <div class="note-text">${n.text}</div>
              </div>
            `).join('')}
-         </div>`
+         </details>`
       : '';
 
     return `
@@ -576,10 +571,6 @@ function renderPapers() {
   }).join('');
 }
 
-function formatDate(dateStr) {
-  const d = new Date(dateStr + 'T00:00:00');
-  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-}
 </script>
 </body>
 </html>
